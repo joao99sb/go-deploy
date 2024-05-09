@@ -9,10 +9,10 @@ const server = http.createServer((req, res) => {
 
   if (req.method === 'GET' && path === '/') {
 
-    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.writeHead(201, { 'Content-Type': 'text/plain; charset=utf-8' });
     setTimeout(() => {
       res.end('Olá Mundo');
-    }, 480); // 5000 milissegundos = 5 segundos
+    }, 480);
   } else if (req.method === 'GET' && path === '/ping') {
 
 

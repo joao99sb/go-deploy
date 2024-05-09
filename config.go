@@ -14,7 +14,6 @@ type resource struct {
 }
 type configuration struct {
 	Server struct {
-		Host        string
 		Listen_port string
 		Timeout     string
 	}

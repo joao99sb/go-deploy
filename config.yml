@@ -1,9 +1,8 @@
 server:
-  host: "localhost"
   listen_port: "8080"
   timeout: 500
 
 resources:
   - name: Server1
-    endpoint: /ping
+    endpoint: /
     destination_url: "http://localhost:3000"
