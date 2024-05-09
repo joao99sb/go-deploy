@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  api_teste:
+    build: .
+    container_name: api_teste
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/app
+    networks:
+      - inbound
+
+networks:
+  inbound:
+    driver: bridge
