@@ -1,8 +1,8 @@
 server:
   listen_port: "8080"
   timeout: 500
+  default_port: 3030
 
 resources:
-  - name: Server1
-    endpoint: /
-    destination_url: "http://localhost:3000"
+  - port: "3000"
+  - port: "3001"

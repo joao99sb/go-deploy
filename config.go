@@ -8,14 +8,13 @@ import (
 )
 
 type resource struct {
-	Name            string
-	Endpoint        string
-	Destination_URL string
+	Port string
 }
 type configuration struct {
 	Server struct {
-		Listen_port string
-		Timeout     string
+		Listen_port  string
+		Timeout      string
+		Default_port string
 	}
 	Resources []resource
 }

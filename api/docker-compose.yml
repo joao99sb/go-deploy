@@ -1,12 +1,22 @@
 version: '3.3'
 services:
-  api_teste:
-    build: .
-    container_name: api_teste
+  api_teste_1:
+    build:
+      context: "./_1"
     ports:
       - 3000:3000
     volumes:
-      - .:/usr/app
+      - ./_1:/usr/app
+    networks:
+      - inbound
+
+  api_teste_2:
+    build:
+      context: "./_2"
+    ports:
+      - 3001:3000
+    volumes:
+      - ./_2:/usr/app
     networks:
       - inbound
 

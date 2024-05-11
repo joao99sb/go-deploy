@@ -3,16 +3,28 @@ const url = require('url');
 
 const PORT = 3000;
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const path = parsedUrl.pathname;
 
   if (req.method === 'GET' && path === '/') {
 
     res.writeHead(201, { 'Content-Type': 'text/plain; charset=utf-8' });
-    setTimeout(() => {
-      res.end('Olá Mundo');
-    }, 480);
+
+
+    const result = await new Promise((resolve, reject) => {
+
+      setTimeout(() => {
+        // Simula uma operação assíncrona bem-sucedida
+        return resolve('Operação assíncrona concluída com sucesso');
+      }, 10000); // 1
+    })
+    console.log(result)
+
+    res.end('Olá Mundo da primeira');
+  } else if (req.method === 'POST' && path === '/test') {
+
+    res.end(JSON.stringify({ message: 'pong' }));
   } else if (req.method === 'GET' && path === '/ping') {
 
 
