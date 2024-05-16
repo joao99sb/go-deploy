@@ -21,7 +21,6 @@ const server = http.createServer(async (req, res) => {
         return resolve('Operação assíncrona concluída com sucesso');
       }, 100); // 1
     })
-    console.log(result)
 
     res.end('Olá Mundo da primeira');
   } else if (req.method === 'POST' && path === '/test') {
@@ -32,7 +31,10 @@ const server = http.createServer(async (req, res) => {
 
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ message: 'pong' }));
-  } else {
+  } else if (req.method === 'GET' && path === '/html'){
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end('<DOCTYPE html><html><head><title>Olá Mundo</title></head><body><h1>Olá Mundo</h1></body></html>');
+  }else {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('Rota não encontrada');
   }

@@ -57,8 +57,7 @@ func HandleEvents(d *DockerHandler, p *Proxy) {
 		switch v := message.(type) {
 		case NewProviderCommand:
 
-			urlString := fmt.Sprintf("http://0.0.0.0:%s", v.Port)
-			p.proxyChangeSignal <- urlString
+			p.proxyChangeSignal <- v.Port
 		}
 
 	}
@@ -68,14 +67,10 @@ func HandleEvents(d *DockerHandler, p *Proxy) {
 func main() {
 	resourcesList := config()
 
-	mux := http.NewServeMux()
-
 	default_redirect_port := os.Getenv("DEFAULT_PORT")
-	urlString := fmt.Sprintf("http://0.0.0.0:%s", default_redirect_port)
 	proxy := NewProxy()
 
-	proxy.setProxyURL(urlString)
-	mux.HandleFunc("/", ProxyRequestHandler(proxy, "/"))
+	proxy.setProxyURL(default_redirect_port)
 
 	dockerCli := NewDockerHandler(resourcesList)
 
@@ -87,6 +82,6 @@ func main() {
 
 	fmt.Printf("server started on port: %s\n", PORT)
 
-	http.ListenAndServe(PORT, mux)
+	http.ListenAndServe(PORT, proxy)
 
 }
