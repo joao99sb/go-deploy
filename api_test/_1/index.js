@@ -24,13 +24,13 @@ const server = http.createServer(async (req, res) => {
 
     res.end('Olá Mundo da primeira');
   } else if (req.method === 'POST' && path === '/test') {
-
+    
     res.end(JSON.stringify({ message: 'pong' }));
-  } else if (req.method === 'GET' && path === '/ping') {
+  } else if (req.method === 'GET' && path === '/health') {
 
 
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ message: 'pong' }));
+    res.end(JSON.stringify({ ok: true }));
   } else if (req.method === 'GET' && path === '/html'){
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end('<DOCTYPE html><html><head><title>Olá Mundo</title></head><body><h1>Olá Mundo</h1></body></html>');
@@ -57,6 +57,8 @@ wss.on('connection', (ws) => {
   });
 });
 
-server.listen(PORT, () => {
+setTimeout(()=>{server.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
+},5000)
+
